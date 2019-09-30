@@ -1,0 +1,9 @@
+Usage
+  $ lambda-prune <functionName>[options]
+
+Options
+  --just-print  Just print logs, don't remove nothing.
+
+Examples
+  $ lambda-prune MyApi # Remove all old functions for `MyApi`
+  $ lambda-prune MyApi --just-print # Simulate cleanup old function, actually doing nothing
