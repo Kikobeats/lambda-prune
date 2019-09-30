@@ -2,7 +2,7 @@
   "name": "lambda-prune",
   "description": "Cleanup old AWS Lambda functions",
   "homepage": "https://nicedoc.io/Kikobeats/lambda-prune",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "index.js",
   "bin": {
     "lambda-prune": "bin/index.js"
