@@ -4,7 +4,9 @@
 
 const log = require('acho')({ keyword: 'λ' })
 const beautyError = require('beauty-error')
+const { existsSync } = require('fs')
 const AWS = require('aws-sdk')
+const path = require('path')
 
 const pkg = require('../package.json')
 
@@ -13,6 +15,10 @@ require('update-notifier')({ pkg }).notify()
 const cli = require('meow')({
   pkg,
   flags: {
+    cwd: {
+      type: 'string',
+      default: process.cwd()
+    },
     justPrint: {
       type: 'boolean',
       default: false
@@ -25,6 +31,13 @@ const onExit = err => {
   return process.exit(err ? 1 : 0)
 }
 
+const getFunctionName = cli => {
+  if (cli.input.length > 0) return cli.input[0]
+  const pkgJson = path.resolve(cli.flags.cwd, 'package.json')
+  if (existsSync(pkgJson)) return require(pkgJson).name
+  return undefined
+}
+
 const getDeployAlias = deploy => {
   if (deploy.Environment.Variables.UP_COMMIT) {
     return `commit-${deploy.Environment.Variables.UP_COMMIT}`
@@ -33,10 +46,10 @@ const getDeployAlias = deploy => {
 }
 
 const main = async () => {
-  const [functionName] = cli.input
-  const { justPrint } = cli.flags
-
+  const functionName = getFunctionName(cli)
   if (!functionName) cli.showHelp()
+
+  const { justPrint } = cli.flags
 
   const required = ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'AWS_REGION']
 
