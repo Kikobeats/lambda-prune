@@ -20,7 +20,7 @@ $ npx lambda-prune
 
 ## Related
 
-- [https://github.com/Kikobeats/untracked](untracked) – Universal way for ignoring unnecessary common files to fit your bundle.
+- [untracked](https://github.com/Kikobeats/untracked) – Universal way for ignoring unnecessary common files to fit your bundle.
 
 ## License
 
