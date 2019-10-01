@@ -6,7 +6,7 @@
   <img align="center" src="media/storage.png" width="500px" alt="lambda prune demo">
   <br>
   <br>
-</div>
+</h1>
 
 ![Last version](https://img.shields.io/github/tag/Kikobeats/lambda-prune.svg?style=flat-square)
 [![Build Status](https://img.shields.io/travis/com/Kikobeats/lambda-prune/master.svg?style=flat-square)](https://travis-ci.com/Kikobeats/lambda-prune)
