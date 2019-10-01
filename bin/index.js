@@ -2,7 +2,10 @@
 
 'use strict'
 
-const log = require('acho')({ keyword: 'λ' })
+const log = require('acho')({
+  keyword: 'λ',
+  types: require('acho-skin-cli')
+})
 const beautyError = require('beauty-error')
 const { existsSync } = require('fs')
 const AWS = require('aws-sdk')
@@ -83,31 +86,35 @@ const main = async () => {
   let aliasCount = 0
 
   for (const deployedFunction of functionsByDate) {
-    const opts = {
-      FunctionName: functionName,
-      Qualifier: deployedFunction.Version
-    }
-
-    const aliasName = getDeployAlias(deployedFunction)
-
-    if (aliasName) {
-      ++aliasCount
-      log.debug('delete', { alias: aliasName })
-      if (!justPrint) {
-        await lambda
-          .deleteAlias({ FunctionName: functionName, Name: aliasName })
-          .promise()
+    try {
+      const opts = {
+        FunctionName: functionName,
+        Qualifier: deployedFunction.Version
       }
-    }
 
-    log.debug('delete', {
-      version: deployedFunction.Version,
-      runtime: deployedFunction.Runtime,
-      memory: deployedFunction.MemorySize
-    })
+      const aliasName = getDeployAlias(deployedFunction)
 
-    if (!justPrint) {
-      await lambda.deleteFunction(opts).promise()
+      if (aliasName) {
+        ++aliasCount
+        log.success({ alias: aliasName })
+        if (!justPrint) {
+          await lambda
+            .deleteAlias({ FunctionName: functionName, Name: aliasName })
+            .promise()
+        }
+      }
+
+      log.success({
+        version: deployedFunction.Version,
+        runtime: deployedFunction.Runtime,
+        memory: deployedFunction.MemorySize
+      })
+
+      if (!justPrint) {
+        await lambda.deleteFunction(opts).promise()
+      }
+    } catch (err) {
+      log.error(err.message)
     }
   }
 

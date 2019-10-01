@@ -40,6 +40,7 @@
   ],
   "dependencies": {
     "acho": "latest",
+    "acho-skin-cli": "latest",
     "aws-sdk": "latest",
     "beauty-error": "latest",
     "meow": "latest",
