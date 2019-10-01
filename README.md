@@ -18,6 +18,10 @@
 $ npx lambda-prune
 ```
 
+## Related
+
+- [https://github.com/Kikobeats/untracked](untracked) – Universal way for ignoring unnecessary common files to fit your bundle.
+
 ## License
 
 **lambda-prune** © [Kiko Beats](https://kikobeats.com), released under the [MIT](https://github.com/Kikobeats/lambda-prune/blob/master/LICENSE.md) License.<br>
