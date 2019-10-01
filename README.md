@@ -1,5 +1,3 @@
-# lambda-prune
-
 <p align="center">
   <img src="media/cli.png" alt="lambda prune demo">
   <br>
