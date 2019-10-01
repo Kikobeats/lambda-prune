@@ -1,5 +1,9 @@
 # lambda-prune
 
+<div align="center">
+  <img src="demo.png" alt="lambda prune demo">
+</div>
+
 ![Last version](https://img.shields.io/github/tag/Kikobeats/lambda-prune.svg?style=flat-square)
 [![Build Status](https://img.shields.io/travis/com/Kikobeats/lambda-prune/master.svg?style=flat-square)](https://travis-ci.com/Kikobeats/lambda-prune)
 [![Dependency status](https://img.shields.io/david/Kikobeats/lambda-prune.svg?style=flat-square)](https://david-dm.org/Kikobeats/lambda-prune)
