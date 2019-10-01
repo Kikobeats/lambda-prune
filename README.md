@@ -1,7 +1,11 @@
 # lambda-prune
 
 <div align="center">
-  <img src="demo.png" alt="lambda prune demo">
+  <img src="media/cli.png" alt="lambda prune demo">
+  <br>
+  <img src="media/storage.jpg" alt="lambda prune demo">
+  <br>
+  <br>
 </div>
 
 ![Last version](https://img.shields.io/github/tag/Kikobeats/lambda-prune.svg?style=flat-square)
