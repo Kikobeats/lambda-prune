@@ -1,9 +1,9 @@
 # lambda-prune
 
-<div align="center">
+<h1 align="center">
   <img src="media/cli.png" alt="lambda prune demo">
   <br>
-  <img src="media/storage.png" alt="lambda prune demo">
+  <img align="center" src="media/storage.png" width="500px" alt="lambda prune demo">
   <br>
   <br>
 </div>
