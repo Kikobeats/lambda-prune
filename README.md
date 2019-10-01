@@ -3,7 +3,7 @@
 <div align="center">
   <img src="media/cli.png" alt="lambda prune demo">
   <br>
-  <img src="media/storage.jpg" alt="lambda prune demo">
+  <img src="media/storage.png" alt="lambda prune demo">
   <br>
   <br>
 </div>
