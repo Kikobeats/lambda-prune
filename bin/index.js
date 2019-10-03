@@ -13,7 +13,9 @@ const path = require('path')
 
 const pkg = require('../package.json')
 
-require('update-notifier')({ pkg }).notify()
+require('update-notifier')({
+  pkg
+}).notify()
 
 const cli = require('meow')({
   pkg,
@@ -42,10 +44,14 @@ const getFunctionName = cli => {
 }
 
 const getDeployAlias = deploy => {
+  let alias
+
   if (deploy.Environment.Variables.UP_COMMIT) {
-    return `commit-${deploy.Environment.Variables.UP_COMMIT}`
+    alias = `commit-${deploy.Environment.Variables.UP_COMMIT}`
   }
-  return undefined
+
+  if (alias) alias = alias.replace(/\./g, '_')
+  return alias
 }
 
 const main = async () => {
@@ -73,7 +79,9 @@ const main = async () => {
   })
 
   const { Versions: functions } = await lambda
-    .listVersionsByFunction({ FunctionName: functionName })
+    .listVersionsByFunction({
+      FunctionName: functionName
+    })
     .promise()
 
   // keep the latest 3 versions
@@ -96,10 +104,15 @@ const main = async () => {
 
       if (aliasName) {
         ++aliasCount
-        log.success({ alias: aliasName })
+        log.success({
+          alias: aliasName
+        })
         if (!justPrint) {
           await lambda
-            .deleteAlias({ FunctionName: functionName, Name: aliasName })
+            .deleteAlias({
+              FunctionName: functionName,
+              Name: aliasName
+            })
             .promise()
         }
       }
@@ -119,7 +132,10 @@ const main = async () => {
   }
 
   console.log()
-  log.info('done', { functions: functionsByDate.length, alias: aliasCount })
+  log.info('done', {
+    functions: functionsByDate.length,
+    alias: aliasCount
+  })
 }
 
 main()
