@@ -43,7 +43,7 @@
     "acho-skin-cli": "latest",
     "aws-sdk": "latest",
     "beauty-error": "latest",
-    "meow": "9",
+    "meow": "12",
     "update-notifier": "latest"
   },
   "devDependencies": {
