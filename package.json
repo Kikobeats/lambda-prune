@@ -1,7 +1,7 @@
 {
   "name": "lambda-prune",
-  "description": "Cleanup old AWS Lambda functions",
-  "homepage": "https://nicedoc.io/Kikobeats/lambda-prune",
+  "description": "Delete old AWS Lambda function versions to reclaim storage and keep deployments tidy.",
+  "homepage": "https://github.com/Kikobeats/lambda-prune",
   "version": "1.1.9",
   "main": "index.js",
   "bin": {
@@ -31,12 +31,15 @@
   },
   "keywords": [
     "aws",
-    "clean",
     "cleanup",
+    "cli",
     "delete",
+    "functions",
     "lambda",
     "prune",
-    "remove"
+    "remove",
+    "serverless",
+    "versions"
   ],
   "dependencies": {
     "acho": "latest",
@@ -50,12 +53,10 @@
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
     "ci-publish": "latest",
-    "conventional-github-releaser": "latest",
     "finepack": "latest",
     "git-authors-cli": "latest",
-    "lint-staged": "latest",
-    "npm-check-updates": "latest",
-    "prettier-standard": "latest",
+    "github-generate-release": "latest",
+    "nano-staged": "latest",
     "simple-git-hooks": "latest",
     "standard": "latest",
     "standard-markdown": "latest",
@@ -69,41 +70,44 @@
   ],
   "scripts": {
     "clean": "rm -rf node_modules",
-    "contributors": "(git-authors-cli && finepack && git add package.json && git commit -m 'build: contributors' --no-verify) || true",
+    "contributors": "(npx git-authors-cli && npx finepack && git add package.json && git commit -m 'build: contributors' --no-verify) || true",
     "lint": "standard-markdown README.md && standard",
     "postrelease": "npm run release:tags && npm run release:github && ci-publish",
-    "prerelease": "npm run update:check && npm run contributors",
+    "prerelease": "npm run contributors",
     "pretest": "npm run lint",
     "release": "standard-version -a",
-    "release:github": "conventional-github-releaser -p angular",
+    "release:github": "github-generate-release",
     "release:tags": "git push --follow-tags origin HEAD:master",
-    "test": "exit 0",
-    "update": "ncu -u",
-    "update:check": "ncu -- --error-level 2"
+    "test": "exit 0"
   },
   "preferGlobal": true,
   "license": "MIT",
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
-    ]
-  },
-  "lint-staged": {
-    "package.json": [
-      "finepack",
-      "git add"
     ],
+    "rules": {
+      "body-max-line-length": [
+        0
+      ]
+    }
+  },
+  "nano-staged": {
     "*.js": [
-      "prettier-standard",
-      "git add"
+      "git add",
+      "prettier-standard"
     ],
     "*.md": [
-      "standard-markdown",
+      "git add",
+      "standard-markdown"
+    ],
+    "package.json": [
+      "finepack",
       "git add"
     ]
   },
   "simple-git-hooks": {
     "commit-msg": "npx commitlint --edit",
-    "pre-commit": "npx lint-staged"
+    "pre-commit": "npx nano-staged"
   }
 }
